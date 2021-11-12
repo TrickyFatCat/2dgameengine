@@ -15,10 +15,10 @@ class Game
 		void Update();
 		void Render();
 		void Destroy();
-		bool GetIsRunning() const { return IsRunning; }
+		bool GetIsRunning() const { return isRunning; }
 
 	private:
-		bool IsRunning = false;
+		bool isRunning = false;
 		SDL_Window *window = nullptr;
 		SDL_Renderer *renderer = nullptr;
 };
