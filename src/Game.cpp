@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "./Constants.h"
+#include "../lib/glm/glm.hpp"
 
 Game::Game()
 {
@@ -14,10 +15,8 @@ Game::~Game()
 
 }
 
-float projectilePosX = 0.0f;
-float projectilePosY = 0.0f;
-float projectileVelX = 10.0f;
-float projectileVelY = 10.0f;
+glm::vec2 projectilePos = glm::vec2(0.0f, 0.0f);
+glm::vec2 projectileVelocity = glm::vec2(30.0f, 30.f);
 
 void Game::Initialize(const int width, const int height)
 {
@@ -84,7 +83,7 @@ void Game::Update()
 	{
 		SDL_Delay(timeToWait);
 	}
-	
+
 	// Delta time is the difference in ticks from last frame converted to seconds
 	float deltaTime = (SDL_GetTicks() - ticksLastFrame) / 1000.0f;
 
@@ -94,8 +93,7 @@ void Game::Update()
 	// Sets the new ticks for the current frame to be used in the next pass
 	ticksLastFrame = SDL_GetTicks();
 
-	projectilePosX += projectileVelX * deltaTime;
-	projectilePosY += projectileVelY * deltaTime;
+	projectilePos = glm::vec2(projectilePos.x + projectileVelocity.x * deltaTime, projectilePos.y + projectileVelocity.y * deltaTime);
 }
 
 void Game::Render()
@@ -105,8 +103,8 @@ void Game::Render()
 
 	SDL_Rect projectile
 	{
-		static_cast<int>(projectilePosX),
-		static_cast<int>(projectilePosY),
+		static_cast<int>(projectilePos.x),
+		static_cast<int>(projectilePos.y),
 		10,
 		10
 	};
