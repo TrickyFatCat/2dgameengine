@@ -10,6 +10,7 @@ class Game
 	public:
 		Game();
 		~Game();
+		int ticksLastFrame = 0;
 		void Initialize(const int width, const int height);
 		void ProcessInput();
 		void Update();
