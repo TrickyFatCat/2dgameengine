@@ -1,7 +1,7 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-class Entitiy;
+class Entity;
 
 class Component
 {
