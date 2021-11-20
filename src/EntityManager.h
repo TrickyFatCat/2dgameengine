@@ -9,12 +9,13 @@
 class EntityManager
 {
 	public:
+		void ClearData();
 		void Update(float deltaTime);
 		void Render();
-		bool HasNoEntities();
-		Entity& AddEntity(std::string EntityName);
+		bool HasNoEntities() const;
+		Entity& AddEntity(const std::string entityName);
 		std::vector<Entity*> GetEntities() const;
-		unsigned int GetEntityCount();
+		unsigned int GetEntityCount() const;
 
 	private:
 		std::vector<Entity*> entities;
