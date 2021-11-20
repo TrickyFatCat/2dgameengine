@@ -10,6 +10,7 @@ class Game
 	public:
 		Game();
 		~Game();
+		static SDL_Renderer *renderer;
 		int ticksLastFrame = 0;
 		void Initialize(const int width, const int height);
 		void ProcessInput();
@@ -21,7 +22,6 @@ class Game
 	private:
 		bool isRunning = false;
 		SDL_Window *window = nullptr;
-		SDL_Renderer *renderer = nullptr;
 };
 
 #endif
