@@ -17,9 +17,6 @@ Game::~Game()
 
 }
 
-glm::vec2 projectilePos = glm::vec2(0.0f, 0.0f);
-glm::vec2 projectileVelocity = glm::vec2(30.0f, 30.f);
-
 void Game::Initialize(const int width, const int height)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -95,7 +92,7 @@ void Game::Update()
 	// Sets the new ticks for the current frame to be used in the next pass
 	ticksLastFrame = SDL_GetTicks();
 
-	projectilePos = glm::vec2(projectilePos.x + projectileVelocity.x * deltaTime, projectilePos.y + projectileVelocity.y * deltaTime);
+	// TODO Here we call the entityManager Update function to update all entities
 }
 
 void Game::Render()
@@ -103,16 +100,7 @@ void Game::Render()
 	SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
 	SDL_RenderClear(renderer);
 
-	SDL_Rect projectile
-	{
-		static_cast<int>(projectilePos.x),
-		static_cast<int>(projectilePos.y),
-		10,
-		10
-	};
-
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(renderer, &projectile);
+	// TODO Here we call the entityManager render function to render all entities
 
 	SDL_RenderPresent(renderer);
 }
