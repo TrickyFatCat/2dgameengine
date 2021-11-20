@@ -5,6 +5,8 @@
 #include "./Constants.h"
 #include "../lib/glm/glm.hpp"
 
+SDL_Renderer*  Game::renderer;
+
 Game::Game()
 {
 	isRunning = false;

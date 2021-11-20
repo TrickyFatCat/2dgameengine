@@ -18,6 +18,7 @@ class Game
 		void Render();
 		void Destroy();
 		bool GetIsRunning() const { return isRunning; }
+		void LoadLevel(const int levelIndex);
 
 	private:
 		bool isRunning = false;
