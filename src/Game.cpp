@@ -4,7 +4,9 @@
 
 #include "./Constants.h"
 #include "../lib/glm/glm.hpp"
+#include "../Components/TransformComponent.h"
 
+EntityManager manager;
 SDL_Renderer*  Game::renderer;
 
 Game::Game()
@@ -45,6 +47,8 @@ void Game::Initialize(const int width, const int height)
 		std::cerr << "Error creating SDL renderer." << std::endl;
 		return;
 	}
+
+	LoadLevel(0);
 
 	isRunning = true;
 }
@@ -92,7 +96,7 @@ void Game::Update()
 	// Sets the new ticks for the current frame to be used in the next pass
 	ticksLastFrame = SDL_GetTicks();
 
-	// TODO Here we call the entityManager Update function to update all entities
+	manager.Update(deltaTime);
 }
 
 void Game::Render()
@@ -100,8 +104,9 @@ void Game::Render()
 	SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
 	SDL_RenderClear(renderer);
 
-	// TODO Here we call the entityManager render function to render all entities
+	if (manager.HasNoEntities()) return;
 
+	manager.Render();
 	SDL_RenderPresent(renderer);
 }
 
@@ -110,4 +115,13 @@ void Game::Destroy()
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+}
+
+void Game::LoadLevel(const int levelIndex)
+{
+	// TODO add entities and components to them
+
+	Entity& newEntity(manager.AddEntity("projectile"));
+
+	newEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 }
