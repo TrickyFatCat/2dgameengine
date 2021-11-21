@@ -1,13 +1,13 @@
 #ifndef TRANSFORMCOMPONENT_H
 #define TRANSFORMCOMPONENT_H
 
-#include "src/Component.h"
+#include "../src/Component.h"
 
-#include "src/EntityManager.h"
-#include "lib/glm/glm.hpp"
+#include "../src/EntityManager.h"
+#include "../lib/glm/glm.hpp"
 
 #include <SDL2/SDL.h>
-#include "src/Game.h"
+#include "../src/Game.h"
 
 class TransformComponent : public Component
 {
