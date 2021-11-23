@@ -1,6 +1,8 @@
 #include "./Entity.h"
 #include "./Component.h"
 
+#include <iostream>
+
 Entity::Entity(EntityManager& manager) : manager(manager)
 {
 	isActive = true;
@@ -36,4 +38,12 @@ void Entity::Destroy()
 bool Entity::GetIsActive() const
 {
 	return this->isActive;
+}
+
+void Entity::ListAllComponents() const
+{
+	for (auto& mapElement : componentTypeMap)
+	{
+		std::cout << "Component<" << mapElement.first->name() << ">" << std::endl;
+	}
 }
