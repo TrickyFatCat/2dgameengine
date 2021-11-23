@@ -4,10 +4,10 @@
 
 #include "./Constants.h"
 #include "../lib/glm/glm.hpp"
-#include "../Components/TransformComponent.h"
+#include "./Components/TransformComponent.h"
 #include "./AssetManager.h"
-#include "../Components/TransformComponent.h"
-#include "../Components/SpriteComponent.h"
+#include "./Components/TransformComponent.h"
+#include "./Components/SpriteComponent.h"
 
 EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);

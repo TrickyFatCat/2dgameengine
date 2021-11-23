@@ -2,8 +2,8 @@
 #define SPRITECOMPONENT_H
 
 #include <SDL2/SDL.h>
-#include "../src/TextureManager.h"
-#include "../src/AssetManager.h"
+#include "../TextureManager.h"
+#include "../AssetManager.h"
 #include "./TransformComponent.h"
 
 class SpriteComponent : public Component
