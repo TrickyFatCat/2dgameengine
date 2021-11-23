@@ -7,12 +7,15 @@
 
 #include "./EntityManager.h"
 
+class AssetManager;
+
 class Game
 {
 	public:
 		Game();
 		~Game();
-		static SDL_Renderer *renderer;
+		static SDL_Renderer* renderer;
+		static AssetManager* assetManager;
 		int ticksLastFrame = 0;
 		void Initialize(const int width, const int height);
 		void ProcessInput();
