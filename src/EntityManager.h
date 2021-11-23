@@ -19,6 +19,7 @@ class EntityManager
 
 	private:
 		std::vector<Entity*> entities;
+		void ListAllEntities() const;
 };
 
 #endif
