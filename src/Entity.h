@@ -33,7 +33,7 @@ class Entity
 		}
 
 		template <typename T>
-		T& GetComponent()
+		T* GetComponent()
 		{
 			return static_cast<T*>(componentTypeMap[&typeid(T)]);
 		}
