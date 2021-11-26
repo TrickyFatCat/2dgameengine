@@ -133,6 +133,6 @@ void Game::LoadLevel(const int levelIndex)
 	tankEntity.AddComponent<SpriteComponent>("tank-image");
 
 	Entity& chopperEntity(manager.AddEntity("chopper"));
-	tankEntity.AddComponent<TransformComponent>(64, 64, 20, 20, 32, 32, 1);
-	tankEntity.AddComponent<SpriteComponent>("chopper-image");
+	tankEntity.AddComponent<TransformComponent>(64, 64, 0, 20, 32, 32, 1);
+	tankEntity.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
 }
