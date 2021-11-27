@@ -8,6 +8,7 @@
 
 #include <SDL2/SDL.h>
 #include "../Game.h"
+#include "../Constants.h"
 
 class TransformComponent : public Component
 {
@@ -37,6 +38,9 @@ class TransformComponent : public Component
 		{
 			position.x += velocity.x * deltaTime;
 			position.y += velocity.y * deltaTime;
+
+			position.x = glm::clamp(position.x, 0.0f, static_cast<float>(WINDOW_WIDTH - width));
+			position.y = glm::clamp(position.y, 0.0f, static_cast<float>(WINDOW_HEIGHT - height));
 		};
 
 		void Render() override
