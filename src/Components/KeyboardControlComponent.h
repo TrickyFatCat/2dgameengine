@@ -54,27 +54,27 @@ class KeyboardControlComponent : public Component
 				if (keyCode.compare(upKey) == 0)
 				{
 					transform->velocity.x = 0;
-					transform->velocity.y = -10;
+					transform->velocity.y = -100;
 					sprite->Play("UpAnimation");
 				}
 
 				if (keyCode.compare(downKey) == 0)
 				{
 					transform->velocity.x = 0;
-					transform->velocity.y = 10;
+					transform->velocity.y = 100;
 					sprite->Play("DownAnimation");
 				}
 
 				if (keyCode.compare(rightKey) == 0)
 				{
-					transform->velocity.x = 10;
+					transform->velocity.x = 100;
 					transform->velocity.y = 0;
 					sprite->Play("RightAnimation");
 				}
 
 				if (keyCode.compare(leftKey) == 0)
 				{
-					transform->velocity.x = -10;
+					transform->velocity.x = -100;
 					transform->velocity.y = 0;
 					sprite->Play("LeftAnimation");
 				}
