@@ -16,6 +16,7 @@ class Game
 		~Game();
 		static SDL_Renderer* renderer;
 		static AssetManager* assetManager;
+		static SDL_Event event;
 		int ticksLastFrame = 0;
 		void Initialize(const int width, const int height);
 		void ProcessInput();

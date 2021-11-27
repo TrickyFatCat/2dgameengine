@@ -8,10 +8,12 @@
 #include "./AssetManager.h"
 #include "./Components/TransformComponent.h"
 #include "./Components/SpriteComponent.h"
+#include "./Components/KeyboardControlComponent.h"
 
 EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer*  Game::renderer;
+SDL_Event Game::event;
 
 Game::Game()
 {
@@ -59,7 +61,6 @@ void Game::Initialize(const int width, const int height)
 
 void Game::ProcessInput()
 {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 	
 	switch (event.type)
@@ -124,18 +125,19 @@ void Game::Destroy()
 void Game::LoadLevel(const int levelIndex)
 {
 	// Start including new assets to the assetManager list
-	assetManager->AddTexture("tank-image", std::string("./assets/images/tank-big-right.png").c_str());
 	assetManager->AddTexture("chopper-image", std::string("./assets/images/chopper-spritesheet.png").c_str());
+	assetManager->AddTexture("tank-image", std::string("./assets/images/tank-big-right.png").c_str());
 	assetManager->AddTexture("radar-image", std::string("./assets/images/radar.png").c_str());
 	
 	// Start including entities and also components to them
+	Entity& chopperEntity(manager.AddEntity("chopper"));
+	chopperEntity.AddComponent<TransformComponent>(64, 64, 0, 0, 32, 32, 1);
+	chopperEntity.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
+	chopperEntity.AddComponent<KeyboardControlComponent>("up", "down", "right", "left", "space");
+
 	Entity& tankEntity(manager.AddEntity("tank"));
 	tankEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 	tankEntity.AddComponent<SpriteComponent>("tank-image");
-
-	Entity& chopperEntity(manager.AddEntity("chopper"));
-	tankEntity.AddComponent<TransformComponent>(64, 64, 0, 20, 32, 32, 1);
-	tankEntity.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
 
 	Entity& radarEntity(manager.AddEntity("radar"));
 	radarEntity.AddComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
