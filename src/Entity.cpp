@@ -1,5 +1,6 @@
 #include "./Entity.h"
 #include "./Component.h"
+#include "./Constants.h"
 
 #include <iostream>
 
@@ -9,7 +10,7 @@ Entity::Entity(EntityManager& manager) : manager(manager)
 
 }
 
-Entity::Entity(EntityManager& manager, std::string name) : manager(manager), name(name)
+Entity::Entity(EntityManager& manager, std::string name, LayerType layer) : manager(manager), name(name), layer(layer)
 {
 	this->isActive = true;
 }
