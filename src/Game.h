@@ -27,6 +27,7 @@ class Game
 		bool GetIsRunning() const { return isRunning; }
 		void LoadLevel(const int levelIndex);
 		void HandleCameraMovement();
+		void CheckCollisions();
 
 	private:
 		bool isRunning = false;
