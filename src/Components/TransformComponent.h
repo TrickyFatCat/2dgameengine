@@ -39,8 +39,8 @@ class TransformComponent : public Component
 			position.x += velocity.x * deltaTime;
 			position.y += velocity.y * deltaTime;
 
-			position.x = glm::clamp(position.x, 0.0f, static_cast<float>(WINDOW_WIDTH - width));
-			position.y = glm::clamp(position.y, 0.0f, static_cast<float>(WINDOW_HEIGHT - height));
+			position.x = glm::clamp(position.x, 0.0f, static_cast<float>((Game::camera.w + Game::camera.x) - width));
+			position.y = glm::clamp(position.y, 0.0f, static_cast<float>((Game::camera.h + Game::camera.y) - height));
 		};
 
 		void Render() override
