@@ -17,6 +17,7 @@ class Game
 		static SDL_Renderer* renderer;
 		static AssetManager* assetManager;
 		static SDL_Event event;
+		static SDL_Rect camera;
 		int ticksLastFrame = 0;
 		void Initialize(const int width, const int height);
 		void ProcessInput();
@@ -25,6 +26,7 @@ class Game
 		void Destroy();
 		bool GetIsRunning() const { return isRunning; }
 		void LoadLevel(const int levelIndex);
+		void HandleCameraMovement();
 
 	private:
 		bool isRunning = false;

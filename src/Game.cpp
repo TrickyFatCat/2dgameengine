@@ -15,6 +15,7 @@ EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer*  Game::renderer;
 SDL_Event Game::event;
+SDL_Rect Game::camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 Map* map;
 
 Game::Game()
@@ -104,6 +105,8 @@ void Game::Update()
 	ticksLastFrame = SDL_GetTicks();
 
 	manager.Update(deltaTime);
+
+	HandleCameraMovement();
 }
 
 void Game::Render()
@@ -124,6 +127,8 @@ void Game::Destroy()
 	SDL_Quit();
 }
 
+Entity& player(manager.AddEntity("chopper", PLAYER_LAYER));
+
 void Game::LoadLevel(const int levelIndex)
 {
 	// Start including new assets to the assetManager list
@@ -136,10 +141,9 @@ void Game::LoadLevel(const int levelIndex)
 	map->LoadMap("./assets/tilemaps/jungle.map", 25, 20);
 	
 	// Start including entities and also components to them
-	Entity& chopperEntity(manager.AddEntity("chopper", PLAYER_LAYER));
-	chopperEntity.AddComponent<TransformComponent>(64, 64, 0, 0, 32, 32, 1);
-	chopperEntity.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
-	chopperEntity.AddComponent<KeyboardControlComponent>("up", "down", "right", "left", "space");
+	player.AddComponent<TransformComponent>(64, 64, 0, 0, 32, 32, 1);
+	player.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
+	player.AddComponent<KeyboardControlComponent>("up", "down", "right", "left", "space");
 
 	Entity& tankEntity(manager.AddEntity("tank", ENEMY_LAYER));
 	tankEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
@@ -148,4 +152,20 @@ void Game::LoadLevel(const int levelIndex)
 	Entity& radarEntity(manager.AddEntity("radar", UI_LAYER));
 	radarEntity.AddComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
 	radarEntity.AddComponent<SpriteComponent>("radar-image", 8, 150, false, true);
+}
+
+void Game::HandleCameraMovement()
+{
+	TransformComponent* mainPlayerTransform = player.GetComponent<TransformComponent>();
+
+	camera.x = mainPlayerTransform->position.x - (WINDOW_WIDTH / 2);
+	camera.y = mainPlayerTransform->position.y - (WINDOW_HEIGHT / 2);
+
+	// Clamping camera position to map boundaries.
+
+	camera.x = camera.x < 0 ? 0 : camera.x;
+	camera.y = camera.y < 0 ? 0 : camera.y;
+
+	camera.x = camera.x > camera.w ? camera.w : camera.x;
+	camera.y = camera.y > camera.h ? camera.h : camera.y;
 }
