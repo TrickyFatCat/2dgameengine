@@ -74,7 +74,7 @@ CollisionType EntityManager::CheckCollisions() const
 {
 	for (int i = 0; i < entities.size() - 1; i++)
 	{
-		const auto& currentEntity = entities.at(i)
+		const auto& currentEntity = entities.at(i);
 		
 		if (!currentEntity->HasComponent<ColliderComponent>()) continue;
 		
