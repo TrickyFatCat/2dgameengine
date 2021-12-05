@@ -32,6 +32,8 @@ class Game
 	private:
 		bool isRunning = false;
 		SDL_Window *window = nullptr;
+		void ProcessNextLevel(const int index);
+		void ProcessGameOver();
 };
 
 #endif

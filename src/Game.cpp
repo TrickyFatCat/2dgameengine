@@ -179,8 +179,7 @@ void Game::CheckCollisions()
 	switch (manager.CheckCollisions())
 	{
 	case PLAYER_X_ENEMY:
-		// TODO Implement collision reaction logic
-		isRunning = false;
+		ProcessGameOver();
 		break;
 
 	case PLAYER_X_PROJECTILE:
@@ -190,6 +189,7 @@ void Game::CheckCollisions()
 		break;
 
 	case PLAYER_X_FINISH:
+		ProcessNextLevel(1);
 		break;
 
 	case ENEMY_X_PROJECTILE:
@@ -198,4 +198,16 @@ void Game::CheckCollisions()
 	default:
 		break;
 	}
+}
+
+void Game::ProcessNextLevel(const int index)
+{
+	std::cout << "Next Level" << std::endl;
+	isRunning = false;
+}
+
+void Game::ProcessGameOver()
+{
+	std::cout << "Game Over" << std::endl;
+	isRunning = false;
 }
