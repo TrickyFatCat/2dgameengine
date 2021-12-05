@@ -146,12 +146,12 @@ void Game::LoadLevel(const int levelIndex)
 	player.AddComponent<TransformComponent>(64, 64, 0, 0, 32, 32, 1);
 	player.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
 	player.AddComponent<KeyboardControlComponent>("up", "down", "right", "left", "space");
-	player.AddComponent<ColliderComponent>("player", 64, 64, 32, 32);
+	player.AddComponent<ColliderComponent>("PLAYER", 64, 64, 32, 32);
 
 	Entity& tankEntity(manager.AddEntity("tank", ENEMY_LAYER));
 	tankEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 	tankEntity.AddComponent<SpriteComponent>("tank-image");
-	tankEntity.AddComponent<ColliderComponent>("enemy", 0, 0, 32, 32);
+	tankEntity.AddComponent<ColliderComponent>("ENEMY", 0, 0, 32, 32);
 
 	Entity& radarEntity(manager.AddEntity("radar", UI_LAYER));
 	radarEntity.AddComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
@@ -176,9 +176,9 @@ void Game::HandleCameraMovement()
 
 void Game::CheckCollisions()
 {
-	std::string collisionTagType = manager.CheckEntityCollisions(player);
+	CollisionType collisionTagType = manager.CheckCollisions();
 
-	if (collisionTagType.compare("enemy") == 0)
+	if (collisionTagType == PLAYER_X_ENEMY)
 	{
 		// TODO: Implement collision reaction logic.
 		isRunning = false;
