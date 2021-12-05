@@ -3,7 +3,6 @@
 
 #include "../Component.h"
 #include "../EntityManager.h"
-#include "../EntityManager.h"
 #include "./TransformComponent.h"
 
 #include <SDL2/SDL.h>
