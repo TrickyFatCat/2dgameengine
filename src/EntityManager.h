@@ -7,6 +7,8 @@
 #include "./Component.h"
 #include "./Constants.h"
 
+class ColliderComponent;
+
 class EntityManager
 {
 	public:
@@ -18,11 +20,12 @@ class EntityManager
 		std::vector<Entity*> GetEntities() const;
 		std::vector<Entity*> GetEntitiesByLayer(const LayerType layer) const;
 		unsigned int GetEntityCount() const;
-		std::string CheckEntityCollisions(Entity& targetEntity) const;
+		CollisionType CheckCollisions() const;
 
 	private:
 		std::vector<Entity*> entities;
 		void ListAllEntities() const;
+		bool IsTagEqual(const ColliderComponent& collider, const std::string& colliderTag) const;
 };
 
 #endif

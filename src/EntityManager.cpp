@@ -70,27 +70,48 @@ unsigned int EntityManager::GetEntityCount() const
 	return entities.size();
 }
 
-std::string EntityManager::CheckEntityCollisions(Entity& targetEntity) const
+CollisionType EntityManager::CheckCollisions() const
 {
-	ColliderComponent* targetCollider = targetEntity.GetComponent<ColliderComponent>();
-
-	for (auto& entity : entities)
+	for (int i = 0; i < entities.size() - 1; i++)
 	{
-		if (entity->name.compare(targetEntity.name) != 0 && entity->name.compare("Tile") != 0)
-		{
-			if (entity->HasComponent<ColliderComponent>())
-			{
-				ColliderComponent* otherCollider = entity->GetComponent<ColliderComponent>();
+		const auto& currentEntity = entities[i];
 		
-					if (Collision::CheckRectangleCollision(targetCollider->collider, otherCollider->collider))
-					{
-						return otherCollider->colliderTag;
-					}
+		if (!currentEntity->HasComponent<ColliderComponent>()) continue;
+		
+		ColliderComponent* currentCollider = currentEntity->GetComponent<ColliderComponent>();
+
+		for (int j = i + 1; j < entities.size(); j++)
+		{
+			const auto& targetEntity = entities[j];
+
+			if (!targetEntity->HasComponent<ColliderComponent>() || currentEntity->name.compare(targetEntity->name) == 0) continue;
+			
+			ColliderComponent* targetCollider = targetEntity->GetComponent<ColliderComponent>();
+
+			if(Collision::CheckRectangleCollision(currentCollider->collider, targetCollider->collider))
+			{
+				if (IsTagEqual(*currentCollider, "PLAYER") && IsTagEqual(*targetCollider, "ENEMY"))
+				{
+					return PLAYER_X_ENEMY;
+				}
+
+				if (IsTagEqual(*currentCollider, "PLAYER") && IsTagEqual(*targetCollider, "PROJECTILE"))
+				{
+					return PLAYER_X_PROJECTILE;
+				}
+
+				if (IsTagEqual(*currentCollider, "ENEMY") && IsTagEqual(*targetCollider, "FRIENDLY_PROJECTILE"))
+				{
+					return ENEMY_X_PROJECTILE;
+				}
+
+				if (IsTagEqual(*currentCollider, "PLAYER") && IsTagEqual(*targetCollider, "FINISH"))
+				{
+					return PLAYER_X_FINISH;
+				}
 			}
 		}
 	}
-
-	return std::string();	
 }
 
 void EntityManager::ListAllEntities() const
@@ -103,4 +124,9 @@ void EntityManager::ListAllEntities() const
 		entity->ListAllComponents();
 		i++;
 	}
+}
+
+bool EntityManager::IsTagEqual(const ColliderComponent& collider, const std::string& tag) const
+{
+	return collider.colliderTag.compare(tag) == 0;
 }
