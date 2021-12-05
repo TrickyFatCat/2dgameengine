@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <SDL2/SDL.h>
+
 namespace
 {
 	constexpr unsigned int WINDOW_WIDTH = 800;
@@ -11,6 +13,9 @@ namespace
 	constexpr float DELTA_TIME_MAX = 0.05f;
 
 	constexpr unsigned int NUM_LAYERS = 6;
+
+	constexpr SDL_Color WHITE_COLOR = {255, 255, 255, 255};
+	constexpr SDL_Color GREEN_COLOR = {0, 255, 0, 255};
 }
 
 enum LayerType
