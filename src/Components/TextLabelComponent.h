@@ -1,7 +1,5 @@
-#ifndef TEXTLABELOMPONENT_H
+#ifndef TEXTLABELCOMPONENT_H
 #define TEXTLABELCOMPONENT_H
-
-#include "../Component.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -13,7 +11,7 @@
 class TextLabelComponent : public Component
 {
 	public:
-		TextLabelComponent(int x, int y, std::string text, std::string fontFamily, const SDL_Color color)
+		TextLabelComponent(int x, int y, std::string text, std::string fontFamily, const SDL_Color& color)
 		{
 			this->position.x = x;
 			this->position.y = y;
@@ -23,7 +21,7 @@ class TextLabelComponent : public Component
 			SetLabelText(text, fontFamily);
 		}
 		
-		void SetLabelText(const std::string text, const std::string fontFamily)
+		void SetLabelText(std::string text, std::string fontFamily)
 		{
 			SDL_Surface* surface = TTF_RenderText_Blended(Game::assetManager->GetFont(fontFamily), text.c_str(), color);
 			texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
