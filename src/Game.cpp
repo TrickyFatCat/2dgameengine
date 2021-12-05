@@ -176,11 +176,26 @@ void Game::HandleCameraMovement()
 
 void Game::CheckCollisions()
 {
-	CollisionType collisionTagType = manager.CheckCollisions();
-
-	if (collisionTagType == PLAYER_X_ENEMY)
+	switch (manager.CheckCollisions())
 	{
-		// TODO: Implement collision reaction logic.
+	case PLAYER_X_ENEMY:
+		// TODO Implement collision reaction logic
 		isRunning = false;
+		break;
+
+	case PLAYER_X_PROJECTILE:
+		break;
+
+	case PLAYER_X_VEGETATION:
+		break;
+
+	case PLAYER_X_FINISH:
+		break;
+
+	case ENEMY_X_PROJECTILE:
+		break;
+	
+	default:
+		break;
 	}
 }
