@@ -12,7 +12,7 @@ namespace
 	constexpr unsigned int FRAME_TARGET_TIME = 1000 / FPS;
 	constexpr float DELTA_TIME_MAX = 0.05f;
 
-	constexpr unsigned int NUM_LAYERS = 6;
+	constexpr unsigned int NUM_LAYERS = 7;
 
 	constexpr SDL_Color WHITE_COLOR = {255, 255, 255, 255};
 	constexpr SDL_Color GREEN_COLOR = {0, 255, 0, 255};
