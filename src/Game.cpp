@@ -172,7 +172,7 @@ void Game::LoadLevel(const int levelIndex)
 	radarEntity.AddComponent<SpriteComponent>("radar-image", 8, 150, false, true);
 
 	Entity& labelLevelName(manager.AddEntity("LabelLevelName", UI_LAYER));
-	labelLevelName.AddComponent<TextLabelComponent>(256, 256, "First level...", "charriot-font", WHITE_COLOR);
+	labelLevelName.AddComponent<TextLabelComponent>(10, 10, "First level...", "charriot-font", WHITE_COLOR);
 }
 
 void Game::HandleCameraMovement()
