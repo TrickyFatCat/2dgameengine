@@ -208,6 +208,7 @@ void Game::CheckCollisions()
 		break;
 
 	case PLAYER_X_PROJECTILE:
+		ProcessGameOver();
 		break;
 
 	case PLAYER_X_VEGETATION:
