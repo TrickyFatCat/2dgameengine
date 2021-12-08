@@ -160,7 +160,7 @@ void Game::LoadLevel(const int levelIndex)
 	player.AddComponent<ColliderComponent>("PLAYER", 64, 64, 32, 32);
 
 	Entity& tankEntity(manager.AddEntity("tank", ENEMY_LAYER));
-	tankEntity.AddComponent<TransformComponent>(150, 495, 5, 0, 32, 32, 1);
+	tankEntity.AddComponent<TransformComponent>(150, 495, 0, 0, 32, 32, 1);
 	tankEntity.AddComponent<SpriteComponent>("tank-image");
 	tankEntity.AddComponent<ColliderComponent>("ENEMY", 0, 0, 32, 32);
 
