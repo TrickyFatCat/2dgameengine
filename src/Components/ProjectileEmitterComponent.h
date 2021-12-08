@@ -15,7 +15,7 @@ class ProjectileEmitterComponent : public Component
 			this->speed = speed;
 			this->range = range;
 			this->isLooping = isLooping;
-			this->angleRad = glm::radians(angleDeg); 
+			this->angleRad = glm::radians(static_cast<float>(angleDeg)); 
 		}
 
 		void Initialize() override
