@@ -147,7 +147,7 @@ void Game::LoadLevel(const int levelIndex)
 	assetManager->AddTexture("radar-image", std::string("./assets/images/radar.png").c_str());
 	assetManager->AddTexture("jungle-tiletexture", std::string("./assets/tilemaps/jungle.png").c_str());
 	assetManager->AddTexture("heliport-image", std::string("./assets/images/heliport.png").c_str());
-	assetManager->AddTexture("projectile-image", std::string("./assets/image/bullet-enemy.png").c_str());
+	assetManager->AddTexture("projectile-image", std::string("./assets/images/bullet-enemy.png").c_str());
 	assetManager->AddFont("charriot-font", std::string("./assets/fonts/charriot.ttf").c_str(), 14);
 
 	map = new Map("jungle-tiletexture", 2, 32);
