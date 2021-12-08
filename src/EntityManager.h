@@ -14,6 +14,7 @@ class EntityManager
 	public:
 		void ClearData();
 		void Update(float deltaTime);
+		void DestroyInaciveEntities();
 		void Render();
 		bool HasNoEntities() const;
 		Entity& AddEntity(const std::string entityName, const LayerType layer);
