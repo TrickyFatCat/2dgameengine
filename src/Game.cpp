@@ -11,6 +11,7 @@
 #include "./Components/KeyboardControlComponent.h"
 #include "./Components/ColliderComponent.h"
 #include "./Components/TextLabelComponent.h"
+#include "./Components/ProjectileEmitterComponent.h"
 #include "./Map.h"
 
 EntityManager manager;
@@ -146,6 +147,7 @@ void Game::LoadLevel(const int levelIndex)
 	assetManager->AddTexture("radar-image", std::string("./assets/images/radar.png").c_str());
 	assetManager->AddTexture("jungle-tiletexture", std::string("./assets/tilemaps/jungle.png").c_str());
 	assetManager->AddTexture("heliport-image", std::string("./assets/images/heliport.png").c_str());
+	assetManager->AddTexture("projectile-image", std::string("./assets/image/bullet-enemy.png").c_str());
 	assetManager->AddFont("charriot-font", std::string("./assets/fonts/charriot.ttf").c_str(), 14);
 
 	map = new Map("jungle-tiletexture", 2, 32);
@@ -158,9 +160,15 @@ void Game::LoadLevel(const int levelIndex)
 	player.AddComponent<ColliderComponent>("PLAYER", 64, 64, 32, 32);
 
 	Entity& tankEntity(manager.AddEntity("tank", ENEMY_LAYER));
-	tankEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+	tankEntity.AddComponent<TransformComponent>(150, 495, 5, 0, 32, 32, 1);
 	tankEntity.AddComponent<SpriteComponent>("tank-image");
 	tankEntity.AddComponent<ColliderComponent>("ENEMY", 0, 0, 32, 32);
+
+	Entity& projectile(manager.AddEntity("projectile", PROJECTILE_LAYER));
+	projectile.AddComponent<TransformComponent>(150 + 16, 495 + 16, 0, 0, 4, 4, 1);
+	projectile.AddComponent<SpriteComponent>("projectile-image");
+	projectile.AddComponent<ColliderComponent>("PROJECTILE", 150 + 16, 495 + 16, 4, 4);
+	projectile.AddComponent<ProjectileEmitterComponent>(50, 270, 200, true);
 
 	Entity& heliport(manager.AddEntity("Heliport", OBSTACLE_LAYER));
 	heliport.AddComponent<TransformComponent>(470, 420, 0, 0, 32, 32, 1);
