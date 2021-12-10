@@ -167,13 +167,19 @@ void Game::LoadLevel(const int levelIndex)
 		{
             sol::table asset = levelAssets[assetIndex];
             std::string assetType = asset["type"];
-
+			std::string assetId = asset["id"];
+			std::string assetFile = asset["file"];
+			
             if (assetType.compare("texture") == 0)
 			{
-                std::string assetId = asset["id"];
-                std::string assetFile = asset["file"];
                 assetManager->AddTexture(assetId, assetFile.c_str());
             }
+			
+			if (assetType.compare("font") == 0)
+			{
+				int fontSize = asset["fontSize"];
+				assetManager->AddFont(assetId, assetFile.c_str(), fontSize);
+			}
         }
         
 		assetIndex++;
